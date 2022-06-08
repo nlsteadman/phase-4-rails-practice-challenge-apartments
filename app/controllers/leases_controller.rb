@@ -3,9 +3,8 @@ class LeasesController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
     def create
-        lease = find_lease
-        lease.update(lease_params)
-        render json: lease
+        lease = Lease.create!(lease_params)
+        render json: lease, status: :created
     end
 
     def destroy
